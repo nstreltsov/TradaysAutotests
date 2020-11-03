@@ -1,6 +1,7 @@
 package com.tradays.metaquotes.page;
 
 import com.tradays.metaquotes.core.annotation.FieldName;
+import com.tradays.metaquotes.core.annotation.Page;
 import com.tradays.metaquotes.core.field.Button;
 import com.tradays.metaquotes.core.field.CheckBox;
 import com.tradays.metaquotes.core.field.StaticText;
@@ -14,6 +15,7 @@ import java.util.List;
 /**
  * @author Nikolay Streltsov on 01.11.2020
  */
+@Page("Фильтр")
 public class FilterPage extends AbstractPageObject {
 
     @FieldName("Отметить все важные")

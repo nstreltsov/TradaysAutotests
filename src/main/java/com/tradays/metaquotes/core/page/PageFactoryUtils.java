@@ -7,7 +7,10 @@ import com.tradays.metaquotes.core.exceptions.ElementCreationError;
 import com.tradays.metaquotes.core.field.MobileElementFacade;
 import org.openqa.selenium.WebElement;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
 
 import static org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor;

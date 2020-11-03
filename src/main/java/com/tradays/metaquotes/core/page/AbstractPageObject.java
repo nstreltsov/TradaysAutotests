@@ -1,14 +1,23 @@
 package com.tradays.metaquotes.core.page;
 
-import com.tradays.metaquotes.core.driver.WebDriverFacade;
+import com.tradays.metaquotes.core.configuration.FrameworkConfig;
+import com.tradays.metaquotes.core.driver.MobileDriverFacade;
 import com.tradays.metaquotes.core.exceptions.ElementCreationError;
 import com.tradays.metaquotes.core.field.MobileElementFacade;
+import io.appium.java_client.PerformsTouchActions;
+import io.appium.java_client.android.AndroidTouchAction;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import lombok.Getter;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
+import java.time.Duration;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,7 +32,7 @@ public abstract class AbstractPageObject implements IPageObject{
     private SearchContext searchContext;
 
     public AbstractPageObject(){
-        this(WebDriverFacade.getDriver());
+        this(MobileDriverFacade.getDriver());
     }
 
     public AbstractPageObject(SearchContext searchContext){
@@ -37,9 +46,14 @@ public abstract class AbstractPageObject implements IPageObject{
 
     public abstract boolean isLoaded();
 
-    @Override
+    protected void waitInvisibilityLoader() {
+        WebDriverWait wait = new WebDriverWait(MobileDriverFacade.getDriver(), FrameworkConfig.get().pageLoadedWait());
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@resource-id='net.metaquotes.economiccalendar:id/loader']")));
+    }
+
+        @Override
     public <T extends MobileElementFacade> T getField(String name){
-        MobileElementFacade element = searchField(this, name);
+        MobileElementFacade element = SearchFieldUtils.searchField(this, name);
         if (Objects.nonNull(element)){
             return (T) element;
         }else{
@@ -49,12 +63,17 @@ public abstract class AbstractPageObject implements IPageObject{
 
     @Override
     public <T extends MobileElementFacade> List<T> getFields(String name){
-        return null;
+        List<MobileElementFacade> element = SearchFieldUtils.searchFields(this, name);
+        if (Objects.nonNull(element)){
+            return (List<T>) element;
+        }else{
+            throw new ElementCreationError(String.format("В классе [%s] не найден элемент [%s]", this, name));
+        }
     }
 
     @Override
     public <T extends IPageObject> List<T> getCollection(String name) {
-        List<IPageObject> element = searchCollection(this, name);
+        List<IPageObject> element = SearchFieldUtils.searchCollection(this, name);
         if (Objects.nonNull(element)){
             return (List<T>) element;
         }else{
@@ -72,67 +91,16 @@ public abstract class AbstractPageObject implements IPageObject{
     }
 
 
-    public <T extends MobileElementFacade> T searchField(AbstractPageObject pageObject, String name){
-        for (Field field: pageObject.getClass().getDeclaredFields()){
-            MobileElementFacade element = searchFieldThisClass(pageObject, name);
-            if (Objects.nonNull(element)){
-                return (T) element;
-            }
-            if (AbstractPageObject.class.isAssignableFrom(field.getType())){
-                try {
-                    return searchField((AbstractPageObject) field.getType().getConstructor().newInstance(), name);
-                } catch (Exception e) {
-                    throw new ElementCreationError(String.format("Не удалось создать объект [%s]", field.getType()));
-                }
-            }
-        }
-        return null;
+    public static void verticalScroll(WebElement elementStart, WebElement elementEnd) {
+        Point p1 = elementStart.getRect().getPoint();
+        Point p2 = elementEnd.getRect().getPoint();
+        new AndroidTouchAction((PerformsTouchActions) MobileDriverFacade.getDriver())
+                .press(PointOption.point(p1.x, p1.y)).waitAction(WaitOptions.waitOptions(Duration.ofMillis(5000)))
+                .moveTo(PointOption.point(p2.x, p2.y)).release().perform();
     }
 
-    private <T extends MobileElementFacade> T searchFieldThisClass(AbstractPageObject pageObject, String name){
-        Field fieldElement = Arrays.asList(pageObject.getClass().getDeclaredFields()).stream()
-                .filter(field -> PageFactoryUtils.getElementName(field).equals(name)).findAny().orElse(null);
-        if (Objects.nonNull(fieldElement)){
-            fieldElement.setAccessible(true);
-            try {
-                return (T) fieldElement.get(pageObject);
-            } catch (IllegalAccessException e) {
-                throw new ElementCreationError(String.format("Не удалось создать объект поля [%s]", name));
-            }
-        }else{
-            return null;
-        }
-    }
-
-    public <T extends IPageObject> List<T> searchCollection(AbstractPageObject pageObject, String name){
-        for (Field field: pageObject.getClass().getDeclaredFields()){
-            List<IPageObject> collection = searchCollectionThisClass(pageObject, name);
-            if (Objects.nonNull(collection)){
-                return (List<T>) collection;
-            }
-            if (AbstractPageObject.class.isAssignableFrom(field.getType())){
-                try {
-                    return searchCollection((AbstractPageObject) field.getType().getConstructor().newInstance(), name);
-                } catch (Exception e) {
-                    throw new ElementCreationError(String.format("Не удалось создать объект [%s]", field.getType()));
-                }
-            }
-        }
-        return null;
-    }
-
-    private <T extends IPageObject> List<T> searchCollectionThisClass(AbstractPageObject pageObject, String name){
-        Field fieldElement = Arrays.asList(pageObject.getClass().getDeclaredFields()).stream()
-                .filter(field -> PageFactoryUtils.getElementName(field).equals(name)).findAny().orElse(null);
-        if (Objects.nonNull(fieldElement)){
-            fieldElement.setAccessible(true);
-            try {
-                return (List<T>) fieldElement.get(pageObject);
-            } catch (IllegalAccessException e) {
-                throw new ElementCreationError(String.format("Не удалось создать объект поля [%s]", name));
-            }
-        }else{
-            return null;
-        }
+    public static void verticalScrollToTop(WebElement elementStart) {
+        verticalScroll(elementStart,
+                MobileDriverFacade.getDriver().findElement(By.xpath(".//*[@resource-id='net.metaquotes.economiccalendar:id/main_toolbar']")));
     }
 }

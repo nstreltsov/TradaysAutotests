@@ -8,7 +8,6 @@ import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -17,21 +16,21 @@ import java.util.Objects;
 /**
  * @author Nikolay Streltsov on 01.11.2020
  */
-public class WebDriverFacade {
+public class MobileDriverFacade {
 
-    private static WebDriverFacade webDriverFacade;
+    private static MobileDriverFacade mobileDriverFacade;
 
     private AndroidDriver driver;
 
-    private WebDriverFacade(){
+    private MobileDriverFacade(){
         driver = initDriver();
     }
 
     public static WebDriver getDriver(){
-        if (Objects.isNull(webDriverFacade)) {
-            webDriverFacade = new WebDriverFacade();
+        if (Objects.isNull(mobileDriverFacade)) {
+            mobileDriverFacade = new MobileDriverFacade();
         }
-        return webDriverFacade.driver;
+        return mobileDriverFacade.driver;
     }
 
     private AndroidDriver initDriver(){

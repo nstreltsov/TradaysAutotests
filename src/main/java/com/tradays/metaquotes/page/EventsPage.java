@@ -1,6 +1,7 @@
 package com.tradays.metaquotes.page;
 
 import com.tradays.metaquotes.core.annotation.FieldName;
+import com.tradays.metaquotes.core.annotation.Page;
 import com.tradays.metaquotes.core.field.Button;
 import com.tradays.metaquotes.core.page.AbstractPageObject;
 import com.tradays.metaquotes.core.page.CollectionPageObject;
@@ -12,7 +13,7 @@ import java.util.List;
 /**
  * @author Nikolay Streltsov on 01.11.2020
  */
-//@Page("Главная страница")
+@Page("События")
 public class EventsPage extends AbstractPageObject {
 
     private BottomBar bottomBar;
@@ -27,7 +28,9 @@ public class EventsPage extends AbstractPageObject {
 
     @Override
     public boolean isLoaded() {
-        return filter.isDisplayed();
+        boolean loaded = filter.isDisplayed();
+        waitInvisibilityLoader();
+        return loaded;
     }
 
     public static class EventItem extends CollectionPageObject {

@@ -1,7 +1,5 @@
 package com.tradays.metaquotes.cucumber;
 
-import lombok.Getter;
-import lombok.ToString;
 import lombok.Value;
 
 /**
@@ -9,5 +7,5 @@ import lombok.Value;
  */
 @Value
 public class FieldTable {
-    private String field;
+    private String fieldName;
 }

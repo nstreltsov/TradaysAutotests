@@ -5,7 +5,6 @@ import com.tradays.metaquotes.cucumber.PageConverter;
 import com.tradays.metaquotes.steps.scenario.PageScenarioSteps;
 import cucumber.api.Transform;
 import cucumber.api.java.ru.Тогда;
-import io.qameta.allure.Step;
 
 /**
  * @author Nikolay Streltsov on 01.11.2020

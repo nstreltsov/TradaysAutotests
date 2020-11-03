@@ -1,4 +1,4 @@
-import com.tradays.metaquotes.core.driver.WebDriverFacade;
+import com.tradays.metaquotes.core.driver.MobileDriverFacade;
 import com.tradays.metaquotes.core.page.AbstractPageObject;
 import com.tradays.metaquotes.core.page.IPageObject;
 import com.tradays.metaquotes.cucumber.FieldTable;
@@ -26,7 +26,7 @@ public class FirstTest {
 
     @Before
     public void before(){
-        WebDriverFacade.getDriver();
+        MobileDriverFacade.getDriver();
     }
 
     @Test
@@ -47,11 +47,11 @@ public class FirstTest {
         fieldScenarioSteps.clickField("История");
 
         List<FieldTable> fieldTables = new ArrayList<>();
-        fieldTables.add(new FieldTable("Дата"));
+ /*       fieldTables.add(new FieldTable("Дата"));
         fieldTables.add(new FieldTable("Актуальное"));
         fieldTables.add(new FieldTable("Прогноз"));
-        fieldTables.add(new FieldTable("Предыдущее"));
-        collectionScenarioSteps.stepGetCollectionValuesByConditions("История индекса потребительского доверия", fieldTables, 10);
+        fieldTables.add(new FieldTable("Предыдущее"));*/
+        //collectionScenarioSteps.stepGetCollectionValuesByConditions("variable", "История индекса потребительского доверия", fieldTables, 10);
         System.err.println(items);
 
     }

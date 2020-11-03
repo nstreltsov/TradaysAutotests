@@ -8,7 +8,6 @@ import com.tradays.metaquotes.page.EventsPage;
 import com.tradays.metaquotes.page.FilterPage;
 import io.qameta.allure.Step;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,6 +26,8 @@ public class FilterScenarioSteps {
 
     @Step("Установлен фильтр: \"$conditions\"")
     public void stepSetFilter(List<FieldValueTable> conditions) {
+        fieldScenarioSteps.clickField("Фильтр");
+        pageScenarioSteps.stepLoadedPage(FilterPage.class);
         unselectedAll();
         conditions.forEach(condition -> {
             pageScenarioSteps.stepLoadedPage(FilterPage.class);
@@ -40,7 +41,6 @@ public class FilterScenarioSteps {
 
     @Step
     private void unselectedAll(){
-        pageScenarioSteps.stepLoadedPage(FilterPage.class);
         unselectedImportance();
         unselectedCountry();
     }

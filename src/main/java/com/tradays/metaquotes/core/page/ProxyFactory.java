@@ -19,4 +19,7 @@ public class ProxyFactory {
     public static <T extends AbstractPageObject> List<T> createElementCollectionProxy(ClassLoader loader, InvocationHandler handler) {
         return (List<T>) Proxy.newProxyInstance(loader, new Class[]{List.class}, handler);
     }
+    public static <T extends WebElement> List<T> creatElementListProxy(ClassLoader loader, InvocationHandler handler) {
+        return (List<T>) Proxy.newProxyInstance(loader, new Class[]{List.class}, handler);
+    }
 }

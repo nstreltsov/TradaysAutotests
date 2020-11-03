@@ -1,6 +1,7 @@
 package com.tradays.metaquotes.page;
 
 import com.tradays.metaquotes.core.annotation.FieldName;
+import com.tradays.metaquotes.core.annotation.Page;
 import com.tradays.metaquotes.core.field.Button;
 import com.tradays.metaquotes.core.field.StaticText;
 import com.tradays.metaquotes.core.page.AbstractPageObject;
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * @author Nikolay Streltsov on 01.11.2020
  */
+@Page("Событие")
 public class EventPage extends AbstractPageObject {
 
     @FieldName("Страна")

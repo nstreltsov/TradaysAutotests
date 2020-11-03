@@ -9,7 +9,11 @@ public interface IFrameworkConfig extends Config {
 
     @Key("driver.timeouts.implicitlywait")
     @DefaultValue("10")
-    int implicitlywait();
+    long implicitlywait();
+
+    @Key("page.timeouts.wait")
+    @DefaultValue("10")
+    long pageLoadedWait();
 
     @Key("page.objects")
     String pageObjects();

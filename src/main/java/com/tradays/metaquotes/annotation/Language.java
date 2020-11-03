@@ -1,4 +1,4 @@
-package com.tradays.metaquotes.core.annotation;
+package com.tradays.metaquotes.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE})
-public @interface Page {
+public @interface Language {
     String value();
 }

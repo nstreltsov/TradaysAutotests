@@ -1,7 +1,8 @@
 package com.tradays.metaquotes.core.page.proxyhandlers;
 
-import com.tradays.metaquotes.core.page.AbstractPageObject;
+import com.tradays.metaquotes.core.field.MobileElementFacade;
 import com.tradays.metaquotes.core.page.PageFactoryUtils;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import java.lang.reflect.InvocationHandler;
@@ -11,15 +12,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * @author Nikolay Streltsov on 01.11.2020
+ * @author Nikolay Streltsov on 03.11.2020
  */
-public class CollectionProxyHandler<T extends AbstractPageObject> implements InvocationHandler {
+public class ElementListProxyHandler<T extends MobileElementFacade> implements InvocationHandler {
 
     private final Class<T> elementClass;
     private final ElementLocator locator;
     private final String name;
 
-    public CollectionProxyHandler(Class<T> elementClass, ElementLocator locator, String name) {
+    public ElementListProxyHandler(Class<T> elementClass, ElementLocator locator, String name) {
         this.elementClass = elementClass;
         this.locator = locator;
         this.name = name;
@@ -30,10 +31,14 @@ public class CollectionProxyHandler<T extends AbstractPageObject> implements Inv
         if ("toString".equals(method.getName())) {
             return name;
         }
+
         List<T> elements = new LinkedList<>();
-        locator.findElements().forEach(element -> {
-            elements.add(PageFactoryUtils.newInstance(elementClass, element));
-        });
+        int elementNumber = 0;
+        for (WebElement element : locator.findElements()) {
+            String newName = String.format("%s [%d]", name, elementNumber++);
+            elements.add(PageFactoryUtils.createElement(elementClass, element, newName));
+        }
+
         try {
             return method.invoke(elements, objects);
         } catch (InvocationTargetException e) {
