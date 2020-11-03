@@ -5,6 +5,7 @@
 *.zip
 *.iml
 *.log
+target/
 _windows/
 codestyles/
 code.style.schemes.xml
