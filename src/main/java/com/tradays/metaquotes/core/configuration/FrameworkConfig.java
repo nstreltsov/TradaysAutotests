@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.util.Properties;
 
 /**
+ * Чтение конфигурации запуска тестов из файла environment.properties
+ *
  * @author Nikolay Streltsov on 01.11.2020
  */
 public class FrameworkConfig {

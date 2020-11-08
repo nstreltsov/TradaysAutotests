@@ -10,10 +10,11 @@
 
     <properties>
         <appium.version>7.3.0</appium.version>
-        <allure-cucumber>2.7.0</allure-cucumber>
+        <allure-cucumber>2.13.6</allure-cucumber>
         <allure-junit4.version>2.12.1</allure-junit4.version>
         <projectlombok.version>1.16.18</projectlombok.version>
         <aspectj.version>1.8.10</aspectj.version>
+        <aspectjweaver.version>1.8.10</aspectjweaver.version>
         <allure-maven.version>2.10.0</allure-maven.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <file.encoding>UTF-8</file.encoding>
@@ -33,6 +34,28 @@
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
             <version>${appium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>gherkin</artifactId>
+            <version>2.12.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>1.2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-core</artifactId>
+            <version>1.2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>1.2.5</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -64,6 +87,16 @@
             <artifactId>guava</artifactId>
             <version>23.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.5</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -92,9 +125,9 @@
                     </systemProperties>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
-                        -Dcucumber.options="--plugin io.qameta.allure.cucumberjvm.AllureCucumberJvm"
                     </argLine>
                     <testFailureIgnore>true</testFailureIgnore>
+                    <useSystemClassLoader>true</useSystemClassLoader>
                 </configuration>
                 <dependencies>
                     <dependency>

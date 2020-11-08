@@ -6,7 +6,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * @author Nikolay Streltsov on 01.11.2020
+ *  Помечаются элементы PageObject,
+ *  по значению аннотации выполняется поиск необходимо поля внутри PageObject
+ *
+ *  * @author Nikolay Streltsov on 01.11.2020
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.FIELD, ElementType.METHOD })

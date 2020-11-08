@@ -4,17 +4,17 @@ import com.tradays.metaquotes.core.driver.MobileDriverFacade;
 import com.tradays.metaquotes.core.field.MobileElementFacade;
 import com.tradays.metaquotes.core.page.AbstractPageObject;
 import com.tradays.metaquotes.core.page.IPageObject;
-import com.tradays.metaquotes.cucumber.FieldTable;
 import com.tradays.metaquotes.cucumber.FieldValueTable;
+import com.tradays.metaquotes.variable.TestVariableHolder;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author Nikolay Streltsov on 01.11.2020
@@ -25,38 +25,49 @@ public class CollectionScenarioSteps {
     private FieldScenarioSteps fieldScenarioSteps = new FieldScenarioSteps();
     private PageScenarioSteps pageScenarioSteps = new PageScenarioSteps();
 
-    @Step("выбирается элемент коллекции \"$collectionName\" с параметрами: \"$conditions\"")
+    @Step("выбирается элемент коллекции \"{collectionName}\" с параметрами: \"$conditions\"")
     public IPageObject stepSetCollectionByConditions(String collectionName, List<FieldValueTable> conditions) {
         return AbstractPageObject.setCurrentPage(searchItem(collectionName, conditions));
     }
 
-    @Step("в переменной \"$variable\" сохранены значения \"$count\" элементов \"$collectionName\" с параметрами: \"$conditions\"")
+    @Step("в переменной \"{variable}\" сохранены значения \"{count}\" элементов \"{collectionName}\" с параметрами: \"$conditions\"")
     public void stepGetCollectionValuesByConditions(String variable, String collectionName, List<String> conditions, int count) {
         IPageObject collectionPage = AbstractPageObject.getCurrentPage();
-        List<IPageObject> items = AbstractPageObject.getCurrentPage().getCollection(collectionName);
-        test(collectionPage, items, collectionName, conditions, count, 0);
-        //TODO добавить скролл, если элементов меньше запрашиваемого
+        List<String> actualValues = new ArrayList<>();
+        actualValues.add(String.join("|", conditions));
+        actualValues.addAll(getCollectionValuesByConditionsRecursive(collectionPage, collectionName, conditions, count, new ArrayList<>()));
+        TestVariableHolder.getVariables().put(variable, actualValues);
     }
 
-    private void test(IPageObject collectionPage, List<IPageObject> items, String collectionName, List<String> fields, int expectedCount, int actualCount){
+    private List<String> getCollectionValuesByConditionsRecursive(
+            IPageObject collectionPage,
+            String collectionName,
+            List<String> fields,
+            int expectedCount,
+            List<String> actualValues){
+        List<IPageObject> items = AbstractPageObject.getCurrentPage().getCollection(collectionName);
         for (IPageObject item: items) {
-            String test = "";
-            for (String field: fields) {
-                if (actualCount == expectedCount){
-                    return;
-                }
-                AbstractPageObject.setCurrentPage(item);
-                test = test + "|" + fieldScenarioSteps.getFieldValue(field) + "|";
-
+            String value = "";
+            if (actualValues.size() == expectedCount){
+                return actualValues;
             }
-            System.err.println(test);
-            ++actualCount;
+            for (String field: fields) {
+                AbstractPageObject.setCurrentPage(item);
+                String fieldValue = fieldScenarioSteps.getFieldValue(field);
+                if (value.isEmpty()){
+                    value = fieldValue;
+                }else{
+                    value = String.join("|", value, fieldValue);
+                }
+            }
+            actualValues.add(value);
         }
-        if (actualCount < expectedCount){
+        if (actualValues.size() < expectedCount){
             AbstractPageObject.verticalScrollToTop((WebElement)items.get(items.size() - 1).getSearchContext());
             AbstractPageObject.setCurrentPage(collectionPage);
-            test(collectionPage, AbstractPageObject.getCurrentPage().getCollection(collectionName), collectionName, fields, expectedCount, actualCount);
+            return getCollectionValuesByConditionsRecursive(collectionPage, collectionName, fields, expectedCount, actualValues);
         }
+        return actualValues;
     }
     @Step
     private IPageObject searchItem(String collectionName, List<FieldValueTable> conditions) {
@@ -78,7 +89,7 @@ public class CollectionScenarioSteps {
                 String actual = elItem.getText();
                 if (actual == null)
                     actual = "";
-                log.info(actual);
+                log.debug(actual);
                 if (!StringUtils.equals(expected, actual)) {
                     match = false;
                 }
@@ -101,7 +112,7 @@ public class CollectionScenarioSteps {
     }
 
 
-    @Step("выбирается элемент коллекции \"$collectionName\" с индексом \"$index\"")
+    @Step("выбирается элемент коллекции \"{collectionName}\" с индексом \"{index}\"")
     public void stepSetCollectionByIndex(String collectionName, int index){
         AbstractPageObject.setCurrentPage(searchItemByIndex(collectionName, index));
     }

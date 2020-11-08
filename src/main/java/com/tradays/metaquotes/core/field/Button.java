@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 /**
  * @author Nikolay Streltsov on 01.11.2020
  */
-public class Button extends MobileElementFacade{
+public class Button extends MobileElementFacade {
 
     public Button(WebElement wrappedElement, String elementName) {
         super(wrappedElement, elementName);

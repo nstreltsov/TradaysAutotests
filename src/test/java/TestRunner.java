@@ -10,8 +10,8 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = {"com.tradays.metaquotes.steps",
                 "com.tradays.metaquotes.hook"},
-        tags = {"@development"}
-
+        tags = {"@development"},
+        plugin = {"com.tradays.metaquotes.logging.AllureCucumberLogger"}
 )
 public class TestRunner {
 }

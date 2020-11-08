@@ -10,7 +10,7 @@ import org.junit.Assert;
  */
 public class PageScenarioSteps {
 
-    @Step("страница \"$page\" загружена")
+    @Step("страница \"{page}\" загружена")
     public IPageObject stepLoadedPage(Class<? extends IPageObject> page){
         IPageObject pageObject = setPage(page);
         pageShouldBeLoaded(pageObject);

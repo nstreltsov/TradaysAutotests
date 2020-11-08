@@ -24,7 +24,7 @@ public class FilterScenarioSteps {
 
     private final String collectionName = "Список элементов фильтра";
 
-    @Step("Установлен фильтр: \"$conditions\"")
+    @Step("устанавливается фильтр: \"{conditions}\"")
     public void stepSetFilter(List<FieldValueTable> conditions) {
         fieldScenarioSteps.clickField("Фильтр");
         pageScenarioSteps.stepLoadedPage(FilterPage.class);

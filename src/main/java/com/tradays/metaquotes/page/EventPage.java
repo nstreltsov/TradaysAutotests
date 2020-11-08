@@ -30,7 +30,7 @@ public class EventPage extends AbstractPageObject {
     private Button history;
 
     @FieldName("История индекса потребительского доверия")
-    @AndroidFindBy(xpath = "//*[@resource-id='net.metaquotes.economiccalendar:id/history_table']//*[@resource-id='net.metaquotes.economiccalendar:id/content']/android.widget.FrameLayout")
+    @AndroidFindBy(xpath = "//*[@resource-id='net.metaquotes.economiccalendar:id/history_table']//*[@resource-id='net.metaquotes.economiccalendar:id/content']/android.widget.FrameLayout[.//android.widget.TextView]")
     private List<HistoryItem> eventItems;
 
     @Override

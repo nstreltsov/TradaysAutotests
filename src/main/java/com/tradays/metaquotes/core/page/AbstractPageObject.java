@@ -22,6 +22,11 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * Основной класс иерарзии PageObject
+ * От этого класса должны наследоваться конкретные реализации PageObject
+ * Содержит методы поиска элементов внутри конкретных PageObject(необходимо чтобы искать поля по аннотации FieldName)
+ * Переопределяет стандартный декоратор элементов PageObject для установки конкретного типа WebElement и возможности работы с коллекциями полей
+ *
  * @author Nikolay Streltsov on 01.11.2020
  */
 public abstract class AbstractPageObject implements IPageObject{

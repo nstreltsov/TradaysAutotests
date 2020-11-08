@@ -16,7 +16,7 @@ import java.util.Set;
 public class PageConverter extends Transformer<Class<? extends IPageObject>> {
 
     @Override
-    public Class<? extends IPageObject> transform(java.lang.String s) {
+    public Class<? extends IPageObject> transform(String s) {
         return searchPageObjectClass(s);
     }
 

@@ -1,6 +1,5 @@
 package com.tradays.metaquotes.steps.feature;
 
-import com.tradays.metaquotes.cucumber.FieldTable;
 import com.tradays.metaquotes.cucumber.FieldValueTable;
 import com.tradays.metaquotes.steps.scenario.CollectionScenarioSteps;
 import cucumber.api.java.ru.Когда;

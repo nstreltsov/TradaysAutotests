@@ -18,7 +18,7 @@ public class SettingScenarioSteps {
 
     private FieldScenarioSteps fieldScenarioSteps = new FieldScenarioSteps();
 
-    @Step("установлен язык приложения \"$language\"")
+    @Step("устанавливается язык приложения \"{language}\"")
     public void setLanguage(ILanguage language){
         AbstractPageObject.setCurrentPage(BottomBar.class);
         fieldScenarioSteps.clickField("Настройки");

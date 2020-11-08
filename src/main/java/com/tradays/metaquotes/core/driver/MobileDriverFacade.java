@@ -6,6 +6,7 @@ import com.tradays.metaquotes.core.exceptions.DriverCreationError;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -14,8 +15,11 @@ import java.net.URL;
 import java.util.Objects;
 
 /**
+ * Singleton класс создающий экземпляр драйвера
+ *
  * @author Nikolay Streltsov on 01.11.2020
  */
+@Slf4j
 public class MobileDriverFacade {
 
     private static MobileDriverFacade mobileDriverFacade;

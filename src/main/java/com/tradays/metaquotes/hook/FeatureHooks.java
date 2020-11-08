@@ -1,6 +1,5 @@
 package com.tradays.metaquotes.hook;
 
-import com.tradays.metaquotes.core.driver.MobileDriverFacade;
 import cucumber.api.java.After;
 
 /**
@@ -9,6 +8,6 @@ import cucumber.api.java.After;
 public class FeatureHooks {
     @After
     public void closeDriver(){
-        MobileDriverFacade.getDriver().quit();
+   //     MobileDriverFacade.getDriver().quit();
     }
 }

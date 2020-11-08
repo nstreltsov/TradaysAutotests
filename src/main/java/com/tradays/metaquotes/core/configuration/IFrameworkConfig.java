@@ -3,6 +3,8 @@ package com.tradays.metaquotes.core.configuration;
 import org.aeonbits.owner.Config;
 
 /**
+ * Описываются поля файла конфигурации environment.properties
+ *
  * @author Nikolay Streltsov on 01.11.2020
  */
 public interface IFrameworkConfig extends Config {

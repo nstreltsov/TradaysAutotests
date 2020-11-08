@@ -5,6 +5,7 @@ import com.tradays.metaquotes.cucumber.FieldValueTable;
 import com.tradays.metaquotes.cucumber.PageConverter;
 import com.tradays.metaquotes.steps.scenario.FieldScenarioSteps;
 import com.tradays.metaquotes.steps.scenario.PageScenarioSteps;
+import cucumber.api.DataTable;
 import cucumber.api.Transform;
 import cucumber.api.java.ru.Когда;
 import cucumber.api.java.ru.Тогда;
@@ -20,6 +21,10 @@ public class FieldSteps {
 
     private PageScenarioSteps pageScenarioSteps = new PageScenarioSteps();
 
+    @Тогда("^test:$")
+    public void test(DataTable fields) {
+        System.err.println();
+    }
     @Когда("^выполнено нажатие на \"([^\"]*)\"$")
     public void clickField(String fieldName){
         fieldScenarioSteps.clickField(fieldName);

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 /**
  * @author Nikolay Streltsov on 01.11.2020
  */
-public class CheckBox extends MobileElementFacade{
+public class CheckBox extends MobileElementFacade {
 
     public CheckBox(WebElement wrappedElement, String elementName) {
         super(wrappedElement, elementName);
