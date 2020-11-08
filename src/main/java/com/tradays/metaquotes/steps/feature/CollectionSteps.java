@@ -7,6 +7,8 @@ import cucumber.api.java.ru.Когда;
 import java.util.List;
 
 /**
+ * Содержит универсальные Cucumber шаги для работы с коллекциями элементов приложения
+ *
  * @author Nikolay Streltsov on 01.11.2020
  */
 public class CollectionSteps {

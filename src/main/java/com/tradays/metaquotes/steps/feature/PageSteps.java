@@ -7,6 +7,8 @@ import cucumber.api.Transform;
 import cucumber.api.java.ru.Тогда;
 
 /**
+ * Содержит универсальные Cucumber шаги для работы со страницами тестируемого приложения
+ *
  * @author Nikolay Streltsov on 01.11.2020
  */
 public class PageSteps {

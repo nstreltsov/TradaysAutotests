@@ -8,6 +8,10 @@ import java.lang.reflect.Proxy;
 import java.util.List;
 
 /**
+ * Фабрика, создающая Proxy-объекты для:
+ *      Элементов (Button, RadioButton и т.д.)
+ *      Списка элементов  (List<Button>, List<Checkbox> и т.д.)
+ *      Списка коллекций (List<T extends ICollectionPageObject>>)
  * @author Nikolay Streltsov on 01.11.2020
  */
 public class ProxyFactory {

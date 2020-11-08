@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class LoggingScenarioSteps {
 
-    @Step("выводится в консоль {variable}")
     public void printVariableToConsole(Object variable){
         if (variable instanceof List){
             String tableFormat = getStringFormat((List<String>) variable);
@@ -23,6 +22,12 @@ public class LoggingScenarioSteps {
         }
     }
 
+    /**
+     * Определяет StringFormat c оптимальной шириной столбцов
+     *
+     * @param variables
+     * @return StringFormat, например |%-15s|%-15s|%-15s|
+     */
     private String getStringFormat(List<String> variables){
         String stringFormat = "";
         int lineCount = variables.size();

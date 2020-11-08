@@ -8,6 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
+ * Хранилище переменных тестового сценария
+ *
  * @author Nikolay Streltsov on 08.11.2020
  */
 public class TestVariableHolder {
@@ -17,6 +19,13 @@ public class TestVariableHolder {
     @Getter
     private static Map<String, Object> variables = new HashMap<>();
 
+    /**
+     * Извлекает значение переменной из коллеции переменных
+     * Функционал можно расширять добавляя новые шаблоны переменных
+     *
+     * @param param - переменная в виде "#{variable}"
+     * @return - значение переменной
+     */
     public static <T> T evalVariable(String param) {
         if (param.trim().matches(".*" + VAR_PATTERN + ".*")) {
             Matcher varMatcher = VAR_PATTERN_COMPILED.matcher(param);

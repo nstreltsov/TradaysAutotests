@@ -12,6 +12,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * Создает объект типа Proxy, который будет инициализирован при обращении, в данном случае (List<Button>, List<Checkbox> и т.д.)
+ *
  * @author Nikolay Streltsov on 03.11.2020
  */
 public class ElementListProxyHandler<T extends MobileElementFacade> implements InvocationHandler {
@@ -26,6 +28,10 @@ public class ElementListProxyHandler<T extends MobileElementFacade> implements I
         this.name = name;
     }
 
+
+    /**
+     * метод, который будет вызван при обращении к Proxy-объекту и вернет конкретный экземпляр proxy-объекта
+     */
     @Override
     public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
         if ("toString".equals(method.getName())) {

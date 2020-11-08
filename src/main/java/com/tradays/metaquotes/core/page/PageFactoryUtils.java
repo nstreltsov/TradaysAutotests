@@ -16,6 +16,8 @@ import java.util.List;
 import static org.apache.commons.lang3.reflect.ConstructorUtils.invokeConstructor;
 
 /**
+ * Вспомошательный класс позволяющий определять типа полей класса и создавать объекты класса
+ * 
  * @author Nikolay Streltsov on 16.05.2020
  */
 public class PageFactoryUtils {

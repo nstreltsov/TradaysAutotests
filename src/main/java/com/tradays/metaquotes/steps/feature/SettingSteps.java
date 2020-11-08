@@ -7,6 +7,8 @@ import cucumber.api.Transform;
 import cucumber.api.java.ru.Дано;
 
 /**
+ * Содержит частные Cucumber шаги для работы с настройками приложения
+ *
  * @author Nikolay Streltsov on 03.11.2020
  */
 public class SettingSteps {

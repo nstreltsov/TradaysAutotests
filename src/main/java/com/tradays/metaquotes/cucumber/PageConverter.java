@@ -11,6 +11,10 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 
 /**
+ * Конвертер для поиска классов по значению аннотации @Page
+ * например, при выполнении шага: страница "События" загружена
+ * будет найден класс EventsPage.class
+ *
  * @author Nikolay Streltsov on 01.11.2020
  */
 public class PageConverter extends Transformer<Class<? extends IPageObject>> {

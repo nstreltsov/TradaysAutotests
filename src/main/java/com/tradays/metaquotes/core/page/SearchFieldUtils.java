@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * Вспомогательный класс для поиска полей внутри классов по их наименованию указанному в аннотации @FieldName
+ *
  * @author Nikolay Streltsov on 03.11.2020
  */
 public class SearchFieldUtils {

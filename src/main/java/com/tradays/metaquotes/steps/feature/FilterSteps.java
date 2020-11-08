@@ -7,6 +7,8 @@ import cucumber.api.java.ru.Когда;
 import java.util.List;
 
 /**
+ * Содержит частные Cucumber шаги работы со страницей установки фильтров
+ *
  * @author Nikolay Streltsov on 01.11.2020
  */
 public class FilterSteps {

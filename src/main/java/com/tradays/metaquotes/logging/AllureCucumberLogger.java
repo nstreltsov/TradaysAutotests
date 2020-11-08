@@ -3,7 +3,10 @@ package com.tradays.metaquotes.logging;
 import gherkin.formatter.model.Feature;
 import io.qameta.allure.cucumberjvm.AllureCucumberJvm;
 import lombok.extern.slf4j.Slf4j;
+
 /**
+ * Логирование начала выполнения теста
+ *
  * @author Nikolay Streltsov on 04.11.2020
  */
 @Slf4j

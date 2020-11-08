@@ -13,6 +13,8 @@ import cucumber.api.java.ru.Тогда;
 import java.util.List;
 
 /**
+ * Содержит универсальные Cucumber шаги для работы с элементами приложения
+ *
  * @author Nikolay Streltsov on 02.11.2020
  */
 public class FieldSteps {
@@ -21,10 +23,6 @@ public class FieldSteps {
 
     private PageScenarioSteps pageScenarioSteps = new PageScenarioSteps();
 
-    @Тогда("^test:$")
-    public void test(DataTable fields) {
-        System.err.println();
-    }
     @Когда("^выполнено нажатие на \"([^\"]*)\"$")
     public void clickField(String fieldName){
         fieldScenarioSteps.clickField(fieldName);

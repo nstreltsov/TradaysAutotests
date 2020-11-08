@@ -11,6 +11,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * Создает объект типа Proxy, которые будет инициализирован при обращении, в данном случае при получении элементов коллекции PageObject
+ *
  * @author Nikolay Streltsov on 01.11.2020
  */
 public class CollectionProxyHandler<T extends AbstractPageObject> implements InvocationHandler {
@@ -25,6 +27,9 @@ public class CollectionProxyHandler<T extends AbstractPageObject> implements Inv
         this.name = name;
     }
 
+    /**
+     * метод, который будет вызван при обращении к Proxy-объекту и вернет конкретный экземпляр proxy-объекта
+     */
     @Override
     public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
         if ("toString".equals(method.getName())) {

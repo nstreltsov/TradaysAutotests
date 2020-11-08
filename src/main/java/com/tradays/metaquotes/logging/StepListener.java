@@ -8,13 +8,18 @@ import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
+ * Логирование выполнения шагов теста
+ *
  * @author Nikolay Streltsov on 07.11.2020
  */
 @Slf4j
 public class StepListener implements StepLifecycleListener {
 
+    //контейнер для определения сколько шагов выполняется в текущий момент, необходим для определения табуляции в отчете
     private LinkedList<StepResult> stepResults = new LinkedList<>();
-    private String prefix = "      ";
+
+    //отступ для вложенного шага
+    private String prefix = "   ";
 
     @Override
     public void afterStepStart(StepResult result) {
@@ -28,6 +33,10 @@ public class StepListener implements StepLifecycleListener {
         log.info("STOP STEP:  {} STATUS: {}", getPrefix() + result.getName(), result.getStatus());
     }
 
+    /**
+     * опеределяет сколько отступов в логе необходимо для текущего шага
+     * @return - отсуп для шага
+     */
     private String getPrefix(){
         AtomicReference<String> prefix = new AtomicReference<>("");
         stepResults.forEach(stepResult -> prefix.set(prefix + this.prefix));
