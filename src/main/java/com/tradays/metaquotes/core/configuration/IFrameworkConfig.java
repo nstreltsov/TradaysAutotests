@@ -38,4 +38,7 @@ public interface IFrameworkConfig extends Config {
     @Key("appActivity")
     String appActivity();
 
+    @Key("application")
+    String application();
+
 }

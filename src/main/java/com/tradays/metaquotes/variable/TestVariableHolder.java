@@ -16,6 +16,7 @@ public class TestVariableHolder {
     private final static String VAR_PATTERN = "\\#\\{(?<var>[^{^(^}^)]*)\\}";
     private final static Pattern VAR_PATTERN_COMPILED = Pattern.compile(VAR_PATTERN);
 
+    //TODO для многопоточного запуска переделать на ThreadLocal
     @Getter
     private static Map<String, Object> variables = new HashMap<>();
 

@@ -16,10 +16,11 @@ import java.util.concurrent.atomic.AtomicReference;
 public class StepListener implements StepLifecycleListener {
 
     //контейнер для определения сколько шагов выполняется в текущий момент, необходим для определения табуляции в отчете
-    private LinkedList<StepResult> stepResults = new LinkedList<>();
+    //TODO для многопоточного запуска переделать на ThreadLocal
+    private static LinkedList<StepResult> stepResults = new LinkedList<>();
 
     //отступ для вложенного шага
-    private String prefix = "   ";
+    private static String prefix = "      ";
 
     @Override
     public void afterStepStart(StepResult result) {
@@ -37,9 +38,9 @@ public class StepListener implements StepLifecycleListener {
      * опеределяет сколько отступов в логе необходимо для текущего шага
      * @return - отсуп для шага
      */
-    private String getPrefix(){
-        AtomicReference<String> prefix = new AtomicReference<>("");
-        stepResults.forEach(stepResult -> prefix.set(prefix + this.prefix));
-        return prefix.get();
+    public static String getPrefix() {
+        AtomicReference<String> prefixAtomicReference = new AtomicReference<>("");
+        stepResults.forEach(stepResult -> prefixAtomicReference.set(prefixAtomicReference + prefix));
+        return prefixAtomicReference.get();
     }
 }

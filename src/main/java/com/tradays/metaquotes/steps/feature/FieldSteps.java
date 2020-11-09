@@ -5,7 +5,6 @@ import com.tradays.metaquotes.cucumber.FieldValueTable;
 import com.tradays.metaquotes.cucumber.PageConverter;
 import com.tradays.metaquotes.steps.scenario.FieldScenarioSteps;
 import com.tradays.metaquotes.steps.scenario.PageScenarioSteps;
-import cucumber.api.DataTable;
 import cucumber.api.Transform;
 import cucumber.api.java.ru.Когда;
 import cucumber.api.java.ru.Тогда;

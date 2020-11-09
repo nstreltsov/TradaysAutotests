@@ -52,7 +52,7 @@ public class MobileDriverFacade {
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, frameworkConfig.platformVersion());
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, frameworkConfig.device());
         capabilities.setCapability(MobileCapabilityType.NO_RESET, true);
-        capabilities.setCapability(MobileCapabilityType.APP, "C:\\projects\\work\\Tradays\\Tradays.apk");
+        capabilities.setCapability(MobileCapabilityType.APP, this.getClass().getClassLoader().getResource(frameworkConfig.application()));
         capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, frameworkConfig.appPackage());
         capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, frameworkConfig.appActivity());
         capabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);

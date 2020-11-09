@@ -2,6 +2,7 @@ package com.tradays.metaquotes.steps.scenario;
 
 import com.tradays.metaquotes.core.page.AbstractPageObject;
 import com.tradays.metaquotes.core.page.IPageObject;
+import com.tradays.metaquotes.logging.StepListener;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -28,7 +29,7 @@ public class FieldScenarioSteps {
     public String getFieldValue(String fieldName){
         IPageObject page = AbstractPageObject.getCurrentPage();
         String value = page.getField(fieldName).getText().trim();
-        log.info("значение поля [{}]: {}", fieldName, value);
+        log.info("GET VALUE : {} значение поля [{}]: {}", StepListener.getPrefix(), fieldName, value);
         return value;
     }
 

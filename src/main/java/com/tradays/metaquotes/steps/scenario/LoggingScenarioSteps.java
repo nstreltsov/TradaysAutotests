@@ -1,6 +1,5 @@
 package com.tradays.metaquotes.steps.scenario;
 
-import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
